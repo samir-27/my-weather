@@ -4,7 +4,19 @@ module.exports = {
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      spacing: {
+        '128':'40rem',
+        '140':'50rem'
+      },
+      fontFamily: {
+        'rale': ['Raleway']
+      },
+      scale: {
+        '110': ['1.10'],
+        '120': ['1.20']
+      },
+    },
   },
   plugins: [],
 }
