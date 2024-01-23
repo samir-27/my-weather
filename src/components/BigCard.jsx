@@ -4,7 +4,7 @@ import min from '../assets/min.png'
 import max from '../assets/max.png'
 import { FaLocationDot } from "react-icons/fa6";
 const BigCard = ({data,city,date}) => {
-    console.log()
+    
     return (
         <div className='text-3xl relative bg-white shadow-xl rounded-xl p-5'>
             <div className="grid grid-cols-2 h-full ">
@@ -32,8 +32,10 @@ const BigCard = ({data,city,date}) => {
                             <div className='text-lg'>max temp</div>
                         </div>
                     </div>
-                    <div className='absolute bottom-0 left-0'><p className='flex items-center'><FaLocationDot size={25} />{data.name}</p></div>
-                    <div className='absolute bottom-0 right-0'>{date}</div>
+                    <div className='absolute bottom-0'>
+                    <div className=''><p className='flex items-center'><FaLocationDot size={25} />{data.name}</p></div>
+                    <div className=''><p className='text-lg'>{date}</p></div>
+                    </div>
                 </div>
             </div>
         </div>
