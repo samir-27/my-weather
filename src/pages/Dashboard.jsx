@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Current from '../components/Current';
 import { IoSearchCircle } from 'react-icons/io5';
 import Home from './Home';
+import Weekly from '../components/Weekly';
 
 const Dashboard = () => {
   const [city, setCity] = useState('');
@@ -16,7 +17,7 @@ const Dashboard = () => {
     console.log('Submitted city:', city);
   };
   return (
-    <div className='bg-sky-200 h-screen'>
+    <div className='bg-sky-300 min-h-screen'>
       <div className='flex items-center container mx-auto py-4'>
         <h1 className='text-4xl mx-4 font-rale text-white font-bold'>Weather App</h1>
         <form onSubmit={handleSubmit} className='flex justify-center items-center'>
@@ -31,6 +32,7 @@ const Dashboard = () => {
         </form>
       </div>
       {city && <Current city={city} />}
+      {city && <Weekly city={city} />}
     </div>
   );
 };
