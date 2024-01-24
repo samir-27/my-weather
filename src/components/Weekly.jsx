@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import TempChart from './TempChart';
+import MinMaxChart from './MinMaxChart';
+import WindSpeedChart from './WindSpeedChart';
 
 const Weekly = ({ city }) => {
   const [weeklyData, setWeeklyData] = useState('');
@@ -18,16 +21,17 @@ const Weekly = ({ city }) => {
 
     fetchWeeklyData();
   }, [city]);
-  const indicesToMap = [0, 6, 14, 22, 30, 38];
-  // console.log(weeklyData);
-
+  const indicesToMap = [3, 9, 17, 25, 33, 39];
+  // console.log(weeklyData)
   // const currentDate = new Date(weeklyData.list[0].dt * 1000);
   // setDate(new Intl.DateTimeFormat('en-GB').format(currentDate));
   return (
     <div className='container mx-auto '>
+
       <h1 className='text-white text-5xl font-bold font-rale py-5'>Weekly Forcast for {city}</h1>
       {weeklyData && (
         <div>
+
           {/* {weeklyData.list[0].dt} */}
 
           <div className="grid lg:grid-cols-6 md:grid-cols-4 sm:grid-cols-3 grid-cols-2 gap-3">
@@ -40,6 +44,17 @@ const Weekly = ({ city }) => {
                   <p>{item.dt_txt}</p>
                 </div>
               ))}
+          </div>
+          <div className='my-5'>
+            <TempChart data={weeklyData.list} />
+            <div className="grid lg:grid-cols-2 grid-cols-1 py-5 gap-5">
+                <div>
+                   <MinMaxChart WeatherData={weeklyData.list}/>
+                </div>
+                <div>
+                  <WindSpeedChart WeatherData={weeklyData.list}/>
+                </div>
+            </div>
           </div>
         </div>
       )}
