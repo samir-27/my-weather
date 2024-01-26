@@ -1,41 +1,45 @@
 import React, { useState } from 'react';
 import Current from '../components/Current';
 import { IoSearchCircle } from 'react-icons/io5';
-import Home from './Home';
 import Weekly from '../components/Weekly';
 
 const Dashboard = () => {
   const [city, setCity] = useState('');
-  const [temp,setTemp] = useState('');
+  const [temp, setTemp] = useState('');
+
   const handleInputChange = (e) => {
-    setTemp(e.target.value);
+    setTimeout(() => {
+      setTemp(e.target.value);
+    }, 2000);
+
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setCity(temp);
-    console.log('Submitted city:', city);
+    // Delay execution 2 seconds
   };
+
   return (
     <div className='bg-sky-300 min-h-screen'>
-      <div className='flex items-center container mx-auto py-4'>
-        <h1 className='text-4xl mx-4 font-rale text-white font-bold'>Weather App</h1>
-        <form onSubmit={handleSubmit} className='flex justify-center items-center'>
-          <input
-            placeholder='London, Hong Kong, Paris'
-            className='p-2 m-4 w-140 rounded-full border-4 border-white duration-500 focus:border-sky-600 outline-none text-sky-600 text-3xl'
-            onChange={handleInputChange}
-          />
-          <button type="submit">
-            <IoSearchCircle className='fill-white hover:scale-120 duration-300 text-7xl cursor-pointer' />
-          </button>
-        </form>
+      <div className=' container mx-auto px-2'>
+        <div className='flex items-center justify-center py-4 '>
+          <form onSubmit={handleSubmit} className='flex justify-center items-center'>
+            <input
+              placeholder='London, Hong Kong, Paris'
+              className='lg:p-2 p-1 m-4 w-auto rounded-full lg:w-140 md:w-96 sm:w-96 w-48 border-4 border-white duration-500 focus:border-sky-600 outline-none text-sky-600 lg:text-xl'
+              onChange={handleInputChange}
+            />
+            <button type="submit">
+              <IoSearchCircle onClick={handleSubmit} className='fill-white hover:scale-120 duration-300 lg:text-7xl text-5xl cursor-pointer' />
+            </button>
+          </form>
+        </div>
+        {city && <Current city={city} />}
+        {city && <Weekly city={city} />}
       </div>
-      {city && <Current city={city} />}
-      {city && <Weekly city={city} />}
     </div>
   );
 };
 
 export default Dashboard;
-

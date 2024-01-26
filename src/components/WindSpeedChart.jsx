@@ -15,9 +15,11 @@ const WindSpeedChart = ({ WeatherData }) => {
               backgroundColor: '#fdba74',
               fill: true,
               cubicInterpolationMode: 'monotone',
-              pointRadius: 4,
+              pointRadius: 3,
             },
+ 
           ],
+          
         }}
       />
     </div>

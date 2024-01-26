@@ -17,37 +17,41 @@ const Current = ({ city }) => {
       try {
         const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}&units=metric`);
         setWeatherData(response.data);
-        // console.log(weatherData)
-
       } catch (error) {
         console.error('Error Fetching Data', error);
       }
     };
-    const currentDate = new Date(weatherData.dt * 1000);
-    const dateTimeFormatOptions = {
-      year: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      second: 'numeric',
-      timeZone: 'Asia/Kolkata',
-    };
-    
-    setDate(new Intl.DateTimeFormat('en-GB', dateTimeFormatOptions).format(currentDate));
+
     fetchData();
   }, [city]);
 
+  useEffect(()=>{
+    if(weatherData){
+      const currentDate = new Date(weatherData.dt * 1000);
+      const dateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'numeric',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        second: 'numeric',
+        timeZone: 'Asia/Kolkata',
+      };
+      setDate(new Intl.DateTimeFormat('en-GB', dateTimeFormatOptions).format(currentDate));
+    }
+    
+  },[weatherData])
+  // console.log(weatherData)
   return (
-    <div className='container mx-auto relative'>
+    <div className='relative'>
       {weatherData && (
         <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
           <BigCard data={weatherData} city={city} date={date} />
           <div className='grid grid-cols-2 gap-4'>
-            <SmallCard name="humidity" value={weatherData.main.humidity} path={humidity} />
-            <SmallCard name="pressure" value={weatherData.main.pressure} path={pressure} />
-            <SmallCard name="wind speed" value={weatherData.wind.speed} path={wind} />
-            <SmallCard name="wind direction" value={weatherData.wind.deg} path={direction} />
+            <SmallCard name="humidity" value={weatherData.main.humidity + "%"} path={humidity} />
+            <SmallCard name="pressure" value={weatherData.main.pressure+" hPa"}  path={pressure} />
+            <SmallCard name="wind speed" value={weatherData.wind.speed + " m/s"} path={wind} />
+            <SmallCard name="wind direction" value={weatherData.wind.deg +  " deg"}path={direction} />
           </div>
         </div>
       )}
