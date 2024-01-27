@@ -35,7 +35,7 @@ const Weekly = ({ city }) => {
 
           {/* {weeklyData.list[0].dt} */}
 
-          <div className="grid lg:grid-cols-5 md:grid-cols-5 sm:grid-cols-3 grid-cols-2 gap-3">
+          <div className="grid  gap-3">
             {weeklyData.list
               .filter((item, index) => indicesToMap.includes(index))
               .map((item, index) => (
@@ -45,16 +45,17 @@ const Weekly = ({ city }) => {
           <div className='mt-5'>
             <TempChart data={weeklyData.list} />
             <div className="grid lg:grid-cols-2 grid-cols-1 py-5 gap-5">
-                <div>
-                   <HumidityChart WeatherData={weeklyData.list}/>
-                </div>
-                <div>
-                  <WindSpeedChart WeatherData={weeklyData.list}/>
-                </div>
+              <div>
+                <HumidityChart WeatherData={weeklyData.list} />
+              </div>
+              <div>
+                <WindSpeedChart WeatherData={weeklyData.list} />
+              </div>
             </div>
           </div>
         </div>
       )}
+      
     </div>
   );
 };

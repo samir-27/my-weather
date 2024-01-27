@@ -1,15 +1,60 @@
-import React from 'react'
+import React, { useState } from 'react';
 
-const DayCard = ({item}) => {
+const DayCard = ({ item }) => {
+  const [showDetails, setShowDetails] = useState(false);
+
+  const toggleDetails = () => {
+    setShowDetails(!showDetails);
+  };
+
   return (
-    <div>
-      <div className='bg-white rounded-xl flex flex-col justify-center items-center p-5 shadow-xl'>
-        <img className='h-24 w-24' src={require(`../assets/icons/${item.weather[0].icon}.png`)} alt="" />
-        <h1 className='my-auto mx-auto text-3xl my-1'>{item.main.temp}°</h1>
-        <p className='lg:text-md md:text-sm sm:text-sm text-xs'>{item.dt_txt}</p>
+    <div className='bg-white rounded-xl shadow-xl cursor-pointer p-4 transition duration-300 ease-in-out transform hover:scale-103' onClick={toggleDetails}>
+      <div className='flex flex-col lg:flex-row md:flex-row sm:flex-row justify-between items-center'>
+        <p className='text-xl  font-semibold mb-2 lg:mb-0'>{item.dt_txt}</p>
+        <div className='flex items-center'>
+          <img
+            className='h-12 w-12 mr-2'
+            src={require(`../assets/icons/${item.weather[0].icon}.png`)}
+            alt=''
+          />
+          <p className='min-w-32 text-gray-600'>{item.weather[0].description}</p>
+          <h1 className='ml-2 text-3xl min-w-12'>{item.main.temp}°</h1>
+        </div>
       </div>
-    </div>
-  )
-}
 
-export default DayCard
+      {showDetails && (
+        <div className='mt-3 p-2 lg:text-xl md:text-xl text-lg bg-sky-100 rounded-xl'>
+          <div className='grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-2 gap-4'>
+            <div className='flex items-center'>
+              <span className='font-semibold sm:w-52 w-52'>Min Temperature:</span>
+              <span className='ml-2'>{item.main.temp_min}°</span>
+            </div>
+            <div className='flex items-center'>
+              <span className='font-semibold sm:w-52 w-52'>Max Temperature:</span>
+              <span className='ml-2'>{item.main.temp_max}°</span>
+            </div>
+            <div className='flex items-center'>
+              <span className='font-semibold sm:w-52 w-52'>Humidity:</span>
+              <span className='ml-2'>{item.main.humidity}%</span>
+            </div>
+            <div className='flex items-center'>
+              <span className='font-semibold sm:w-52 w-52'>Pressure:</span>
+              <span className='ml-2'>{item.main.pressure} hPa</span>
+            </div>
+            <div className='flex items-center'>
+              <span className='font-semibold sm:w-52 w-52'>Wind Speed:</span>
+              <span className='ml-2'>{item.wind.speed} m/s</span>
+            </div>
+            <div className='flex items-center'>
+              <span className='font-semibold sm:w-52 w-52'>Wind Direction:</span>
+              <span className='ml-2'>{item.wind.deg}°</span>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default DayCard;
+

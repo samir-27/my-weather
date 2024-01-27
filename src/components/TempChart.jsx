@@ -3,7 +3,7 @@ import Chart from 'chart.js/auto';
 import { Bar, Doughnut, Line } from 'react-chartjs-2';
 const TempChart = ({ data }) => {
     return (
-        <div className='bg-white rounded-xl max-h-112 flex justify-center'>
+        <div className='bg-white rounded-xl flex justify-center'>
 
     <Line
         data={{
@@ -25,10 +25,7 @@ const TempChart = ({ data }) => {
                     position: 'top',
                 },
             },
-            scales: {
 
-            },
-            aspectRatio: 2, // Set the aspect ratio to control responsiveness
         }}
     />
 </div>
