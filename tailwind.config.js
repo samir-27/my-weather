@@ -8,7 +8,8 @@ module.exports = {
       spacing: {
         '112': '35rem',
         '128':'40rem',
-        '140':'50rem'
+        '140':'50rem',
+        '150':'60rem'
       },
       fontFamily: {
         'rale': ['Raleway']
