@@ -7,10 +7,17 @@ const DayCard = ({ item }) => {
     setShowDetails(!showDetails);
   };
 
+  const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
+  const d = new Date(item.dt_txt);
+  const dayName = daysOfWeek[d.getDay()];
+  const formattedTime = `${d.getHours()}:${d.getMinutes()}:${d.getSeconds()}`;
+
   return (
     <div className='bg-white rounded-xl shadow-xl cursor-pointer p-4 transition duration-300 ease-in-out transform hover:scale-103' onClick={toggleDetails}>
       <div className='flex flex-col lg:flex-row md:flex-row sm:flex-row justify-between items-center'>
-        <p className='text-xl  font-semibold mb-2 lg:mb-0'>{item.dt_txt}</p>
+        <div className='text-xl font-semibold mb-2 lg:mb-0 flex'><p className='w-32'>{dayName}</p> {formattedTime}</div>
+
         <div className='flex items-center'>
           <img
             className='h-12 w-12 mr-2'
@@ -18,7 +25,7 @@ const DayCard = ({ item }) => {
             alt=''
           />
           <p className='min-w-32 text-gray-600'>{item.weather[0].description}</p>
-          <h1 className='ml-2 text-3xl min-w-12'>{item.main.temp}°</h1>
+          <h1 className='ml-2 text-3xl min-w-20'>{item.main.temp}°</h1>
         </div>
       </div>
 

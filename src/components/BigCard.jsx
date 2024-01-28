@@ -6,10 +6,10 @@ import { FaLocationDot } from "react-icons/fa6";
 const BigCard = ({data,date}) => {
     // console.log(data)
     return (
-        <div className='text-3xl relative bg-white shadow-xl rounded-xl p-5'>
+        <div className='text-3xl relative bg-white shadow-xl rounded-xl p-5 min-h-60'>
             <div className="grid grid-cols-2 h-full ">
                 <div className='mx-auto my-auto'>
-                    <img className='lg:h-48 md:h-36' src={require(`../assets/icons/${data.weather[0].icon}.png`)} alt="" />
+                    <img className='lg:h-48 md:h-48 sm:h-40 h-32' src={require(`../assets/icons/${data.weather[0].icon}.png`)} alt="" />
                     <h1 className='text-center'>{data.weather[0].description}</h1>
                 </div>
                 <div className='relative'>

@@ -9,7 +9,7 @@ const Search = ({ onSearchChange }) => {
 
     const loadOptions = async (inputValue) => {
         try {
-           const response = await axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?rapidapi-key=${API_KEY}&namePrefix=${inputValue}&minPopulation=`)
+           const response = await axios.get(`https://wft-geo-db.p.rapidapi.com/v1/geo/cities?rapidapi-key=${API_KEY}&namePrefix=${inputValue}&limit=10`)
            const data= response.data.data
            const options = data.map((item) => ({
             value: item.city,
@@ -30,10 +30,10 @@ const Search = ({ onSearchChange }) => {
         onSearchChange(searchData)
     }
     return (
-        <div className='flex items-center justify-center py-4 '>
+        <div className='flex items-center justify-center py-6'>
             <AsyncPaginate 
-            className='lg:w-150 md:w-140 sm:w-112 w-96'
-                placeholder="Search for"
+            className='w-full'
+                placeholder="Search for city"
                 debounceTimeout={1200}
                 value={search}
                 onChange={handleOnChange}

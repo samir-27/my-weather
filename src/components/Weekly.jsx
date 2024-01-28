@@ -29,13 +29,13 @@ const Weekly = ({ city }) => {
   return (
     <div className=''>
 
-      <h1 className='text-white lg:text-5xl md:text-3xl sm:text-2xl text-2xl font-bold font-rale py-5'>Forcast for 5 days</h1>
+      {/* <h1 className='text-white lg:text-5xl md:text-3xl sm:text-2xl text-2xl font-bold font-rale py-5'>Forcast for 5 days</h1> */}
       {weeklyData && (
         <div>
 
           {/* {weeklyData.list[0].dt} */}
 
-          <div className="grid  gap-3">
+          <div className="grid mt-3  gap-3">
             {weeklyData.list
               .filter((item, index) => indicesToMap.includes(index))
               .map((item, index) => (
