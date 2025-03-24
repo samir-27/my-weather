@@ -42,3 +42,9 @@ Start the server
 ```bash
   npm run start
 ```
+
+## Screenshots 
+
+![current](src/screenshots/current.png)
+![chart1](src/screenshots/chart1.png)
+![chart2](src/screenshots/chart2.png)
