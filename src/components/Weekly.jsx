@@ -4,8 +4,8 @@ import TempChart from './TempChart';
 import WindSpeedChart from './WindSpeedChart';
 import HumidityChart from './HumidityChart';
 import DayCard from './DayCard';
-const Weekly = ({ city }) => {
-  // console.log(city)
+
+const Weekly = ({ location }) => {
   const [weeklyData, setWeeklyData] = useState('');
   const API_KEY = "fd136502e52304c726be3e7ebc6f4d33";
 
@@ -14,28 +14,25 @@ const Weekly = ({ city }) => {
   useEffect(() => {
     const fetchWeeklyData = async () => {
       try {
-        const response = await axios.get(`https://api.openweathermap.org/data/2.5/forecast?appid=${API_KEY}&q=${city}&units=metric`);
+        const response = await axios.get(
+          `https://api.openweathermap.org/data/2.5/forecast?lat=${location.lat}&lon=${location.lon}&appid=${API_KEY}&units=metric`
+        );
         setWeeklyData(response.data);
       } catch (error) {
         console.error('Error fetching weekly data', error);
       }
     };
 
-    fetchWeeklyData();
-  }, [city]);
-  // console.log(weeklyData)
-  // const currentDate = new Date(weeklyData.list[0].dt * 1000);
-  // setDate(new Intl.DateTimeFormat('en-GB').format(currentDate));
+    if (location) {
+      fetchWeeklyData();
+    }
+  }, [location]);
+
   return (
     <div className=''>
-
-      {/* <h1 className='text-white lg:text-5xl md:text-3xl sm:text-2xl text-2xl font-bold font-rale py-5'>Forcast for 5 days</h1> */}
       {weeklyData && (
         <div>
-
-          {/* {weeklyData.list[0].dt} */}
-
-          <div className="grid mt-3  gap-3">
+          <div className="grid mt-3 gap-3">
             {weeklyData.list
               .filter((item, index) => indicesToMap.includes(index))
               .map((item, index) => (
@@ -55,8 +52,8 @@ const Weekly = ({ city }) => {
           </div>
         </div>
       )}
-      
     </div>
   );
 };
+
 export default Weekly;
