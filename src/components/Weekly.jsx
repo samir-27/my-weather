@@ -5,11 +5,9 @@ import WindSpeedChart from './WindSpeedChart';
 import HumidityChart from './HumidityChart';
 import DayCard from './DayCard';
 
-const Weekly = ({ location }) => {
-  const [weeklyData, setWeeklyData] = useState('');
-  const API_KEY = "fd136502e52304c726be3e7ebc6f4d33";
-
-  const indicesToMap = [1, 9, 17, 25, 33]; // Updated indices for the next five days
+const Weekly = ({ location, selectedTime }) => {
+  const [weeklyData, setWeeklyData] = useState(null);
+  const API_KEY = 'fd136502e52304c726be3e7ebc6f4d33';
 
   useEffect(() => {
     const fetchWeeklyData = async () => {
@@ -28,18 +26,34 @@ const Weekly = ({ location }) => {
     }
   }, [location]);
 
+  // Filter forecast data based on user-selected time slot
+  const filterBySelectedTime = () => {
+    if (!weeklyData || !weeklyData.list) return [];
+    
+    // If 'current' is selected, default to mid-day (12:00:00) for daily view cards
+    const timeToMatch = selectedTime === 'current' ? '12:00:00' : selectedTime;
+
+    return weeklyData.list.filter((item) => item.dt_txt.includes(timeToMatch));
+  };
+
+  const filteredDays = filterBySelectedTime();
+
   return (
-    <div className=''>
+    <div className="mt-5">
       {weeklyData && (
         <div>
+          {selectedTime !== 'current' && (
+             <h2 className="text-white text-xl font-bold mb-2">5-Day Forecast ({selectedTime})</h2>
+          )}
+          
+          {/* Reverted back to the original vertically stacked UI */}
           <div className="grid mt-3 gap-3">
-            {weeklyData.list
-              .filter((item, index) => indicesToMap.includes(index))
-              .map((item, index) => (
-                <DayCard key={index} item={item} />
-              ))}
+            {filteredDays.map((item, index) => (
+              <DayCard key={index} item={item} />
+            ))}
           </div>
-          <div className='mt-5'>
+
+          <div className="mt-5">
             <TempChart data={weeklyData.list} />
             <div className="grid lg:grid-cols-2 grid-cols-1 py-5 gap-5">
               <div>
