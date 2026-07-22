@@ -4,7 +4,8 @@ import min from '../assets/min.png'
 import max from '../assets/max.png'
 import { FaLocationDot } from "react-icons/fa6";
 const BigCard = ({data,date}) => {
-    // console.log(data)
+    console.log("bigcard")
+    console.log(data.weather[0].icon)
     return (
         <div className='text-3xl relative bg-white shadow-xl rounded-xl p-5 min-h-60'>
             <div className="grid grid-cols-2 h-full ">

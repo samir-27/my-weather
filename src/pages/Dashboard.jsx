@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Current from '../components/Current';
 import Weekly from '../components/Weekly';
 import bg from '../assets/bg.jpg';
-import { IoSearchCircle } from 'react-icons/io5';
 import Search from '../components/Search';
 
 const Dashboard = () => {
@@ -24,7 +23,7 @@ const Dashboard = () => {
       <div className="container mx-auto px-3 relative z-10">
         <Search onSearchChange={handleSearchChange} />
         {location && <Current location={location} />} {/* Pass location instead of city */}
-        {location && <Weekly location={location} />} {/* Pass location instead of city */}
+        {location && <Weekly location={location} />}
       </div>
     </div>
   );
